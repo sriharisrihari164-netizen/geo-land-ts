@@ -16,6 +16,16 @@ async def get_db():
     finally:
         await conn.close()
 
+@app.get("/")
+async def root():
+    return {
+        "project": "Geo-Land TS",
+        "status": "Online",
+        "region": "Telangana",
+        "docs": "/docs",
+        "endpoint": "/identify-land (POST)"
+    }
+
 class Location(BaseModel):
     latitude: float
     longitude: float

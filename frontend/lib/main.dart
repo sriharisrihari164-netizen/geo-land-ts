@@ -58,7 +58,7 @@ class _MapScreenState extends State<MapScreen> {
 
       // 2. Call Backend API
       final response = await http.post(
-        Uri.parse('http://your-backend-ip:8000/identify-land'),
+        Uri.parse('https://geo-land-ts-git-main-sriharisrihari164-netizens-projects.vercel.app/identify-land'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'latitude': position.latitude,
