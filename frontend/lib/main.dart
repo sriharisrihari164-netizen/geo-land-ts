@@ -91,9 +91,26 @@ class _MapScreenState extends State<MapScreen> {
       if (permission == LocationPermission.denied) throw Exception('Location permissions are denied');
     }
 
-    return await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.bestForNavigation,
-    );
+    try {
+      return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.bestForNavigation,
+        timeLimit: const Duration(seconds: 5),
+      );
+    } catch (e) {
+      // Fallback for Web/Desktop testing where GPS times out or throws an error
+      return Position(
+        longitude: 79.5941,
+        latitude: 17.9689,
+        timestamp: DateTime.now(),
+        accuracy: 1.0,
+        altitude: 0.0,
+        heading: 0.0,
+        speed: 0.0,
+        speedAccuracy: 0.0,
+        altitudeAccuracy: 0.0,
+        headingAccuracy: 0.0,
+      );
+    }
   }
 
   void _showOwnerSheet(Map<String, dynamic> data) {
